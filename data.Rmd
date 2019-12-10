@@ -1,0 +1,262 @@
+---
+title: "Data"
+author: "Olivia Abbott"
+date: "12/9/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages("tidyverse")
+library("tidyverse")
+library("dplyr")
+library("tidyr")
+library(ggplot2)
+
+red_wine_data <- read.csv('http://mlr.cs.umass.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv', sep = ";")
+
+head(red_wine_data)
+
+summary(red_wine_data)
+mean(red_wine_data$quality)
+
+red_wine_data$quality <- factor(red_wine_data$quality, levels=c(3,4,5,6,7,8), labels=c(3,4,5,6,7,8))
+```
+
+Data Analysis:
+
+1) fixed.acidity: the measurement of the total concentration of titratable acids and free hydrogen ions present in your wine. These acids, along with many more in smaller quantities, either occur naturally in the grapes or are created through the fermentation process.
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=fixed.acidity), colour = 'red', size = 1)
+
+# Kernel density plots of fixed acidity
+# grouped by quality ranking
+qplot(fixed.acidity, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on fixed.acidity level", xlab="fixed.acidity",
+   ylab="Density")
+
+# Boxplots of fixed acidity by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, fixed.acidity, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="fixed.acidity by Quality",
+   xlab="", ylab="fixed.acidity")
+
+qplot(quality, fixed.acidity, data=red_wine_data, geom="boxplot",
+   fill=quality, main="fixed.acidity by Quality",
+   xlab="", ylab="fixed.acidity")
+```
+
+2) volatile.acidity: Volatile acidity is mostly caused by bacteria in the wine creating acetic acid and its byproduct, ethyl acetate. Volatile acidity could be an indicator of spoilage, or errors in the manufacturing processes. This is caused by things like damaged grapes, wine exposed to air, etc. This causes acetic acid bacteria to enter and thrive, and give rise to unpleasant tastes and smells.
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=volatile.acidity), colour = 'red', size = 1)
+
+# Kernel density plots of volatile acididity
+# grouped by quality ranking
+qplot(volatile.acidity, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on volatile.acidity level", xlab="volatile.acidity",
+   ylab="Density")
+
+# Boxplots of volatile acidity by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, volatile.acidity, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="volatile.acidity by Quality",
+   xlab="", ylab="volatile.acidity")
+
+qplot(quality, volatile.acidity, data=red_wine_data, geom="boxplot",
+   fill=quality, main="volatile.acidity by Quality",
+   xlab="", ylab="volatile.acidity")
+```
+
+3) citric.acid: Citric acid is generally found in very small quantities in wine grapes. It acts as a preservative and is added to wines to increase acidity, complement a specific flavor or prevent ferric hazes. However, if too much is added to the wine, it can ruin the taste.
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=citric.acid), colour = 'red', size = 1)
+
+# Kernel density plots of citric acid
+# grouped by quality ranking
+qplot(citric.acid, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on citric.acid level", xlab="citric.acid",
+   ylab="Density")
+
+# Boxplots of citric acid by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, citric.acid, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="citric.acid by Quality",
+   xlab="", ylab="citric.acid")
+
+qplot(quality, citric.acid, data=red_wine_data, geom="boxplot",
+   fill=quality, main="citric.acid by Quality",
+   xlab="", ylab="citric.acid")
+```
+
+4) residual.sugar: This refers to any natural grape sugars that are leftover after fermentation ceases. During fermentation, the natural grape sugars are used up as the yeast feasts on it. Typically most of the sugar is used up during fermentation causing the wine to be very dry. 
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=residual.sugar), colour = 'red', size = 1)
+
+# Kernel density plots of residual sugar
+# grouped by quality ranking
+qplot(residual.sugar, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on residual.sugar level", xlab="residual.sugar",
+   ylab="Density")
+
+# Boxplots of residual sugar by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, residual.sugar, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="residual.sugar by Quality",
+   xlab="", ylab="residual.sugar")
+
+qplot(quality, residual.sugar, data=red_wine_data, geom="boxplot",
+   fill=quality, main="residual.sugar by Quality",
+   xlab="", ylab="residual.sugar")
+```
+
+5) chlorides: The amount of chlorides present in a wine is usually an indicator of its “saltiness.” This is usually influenced by the territory where the wine grapes grew, cultivation methods, and also the grape type. Too much saltiness is considered undesirable. The right proportion can make the wine more savory
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=chlorides), colour = 'red', size = 1)
+
+# Kernel density plots of chlorides
+# grouped by quality ranking
+qplot(chlorides, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on chlorides level", xlab="chlorides",
+   ylab="Density")
+
+# Boxplots of chlorides by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, chlorides, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="chlorides by Quality",
+   xlab="", ylab="chlorides")
+
+qplot(quality, chlorides, data=red_wine_data, geom="boxplot",
+   fill=quality, main="chlorides by Quality",
+   xlab="", ylab="chlorides")
+```
+
+6) free.sulfur.dioxide: Sulfur dioxide exists in both free and bound forms. It’s the most common preservative used, usually added by wine makers to protect the wine from negative effects of exposure to air and oxygen. It acts as a sanitizing agent and adding it usually kills unwanted bacteria or yeast that might enter the wine and spoil its taste and aroma.
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=free.sulfur.dioxide), colour = 'red', size = 1)
+
+# Kernel density plots of free sulfur dioxide
+# grouped by quality ranking
+qplot(free.sulfur.dioxide, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on free.sulfur.dioxide level", xlab="free.sulfur.dioxide",
+   ylab="Density")
+
+# Boxplots of free sulfur dioxide by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, free.sulfur.dioxide, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="free.sulfur.dioxide by Quality",
+   xlab="", ylab="free.sulfur.dioxide")
+
+qplot(quality, free.sulfur.dioxide, data=red_wine_data, geom="boxplot",
+   fill=quality, main="free.sulfur.dioxide by Quality",
+   xlab="", ylab="free.sulfur.dioxide")
+```
+
+7) total.sulfur.dioxide
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=total.sulfur.dioxide), colour = 'red', size = 1)
+
+# Kernel density plots of total sulfur dioxide
+# grouped by quality ranking
+qplot(total.sulfur.dioxide, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on total.sulfur.dioxide level", xlab="total.sulfur.dioxide",
+   ylab="Density")
+
+# Boxplots of total sulfur dioxide by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, total.sulfur.dioxide, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="total.sulfur.dioxide by Quality",
+   xlab="", ylab="total.sulfur.dioxide")
+
+qplot(quality, total.sulfur.dioxide, data=red_wine_data, geom="boxplot",
+   fill=quality, main="total.sulfur.dioxide by Quality",
+   xlab="", ylab="total.sulfur.dioxide")
+```
+
+8) density: Also known as specific gravity, it can be used to measure the alcohol concentration in wines. During fermentation, the sugar in the juice is converted into ethanol with carbon dioxide as a waste gas. Monitoring the density during the process allows for optimal control of this conversion step for highest quality wines. Sweeter wines generally have higher densities.
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=density), colour = 'red', size = 1)
+
+# Kernel density plots of density
+# grouped by quality ranking
+qplot(density, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on Density level", xlab="Alcohol",
+   ylab="Density")
+
+# Boxplots of density by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, density, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="Density by Quality",
+   xlab="", ylab="Density")
+
+qplot(quality, density, data=red_wine_data, geom="boxplot",
+   fill=quality, main="Density by Quality",
+   xlab="", ylab="Density")
+```
+
+9) pH: This is the measurement of the hydrogen ion concentration in the solution. Generally, solutions with a pH value less than 7 are considered acidic, with some of the strongest acids being close to 0. Solutions above 7 are considered alkaline or basic. 
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=pH), colour = 'red', size = 1)
+
+# Kernel density plots of pH
+# grouped by quality ranking
+qplot(pH, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on pH level", xlab="pH",
+   ylab="Density")
+
+# Boxplots of pH by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, pH, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="pH by Quality",
+   xlab="", ylab="pH")
+
+qplot(quality, pH, data=red_wine_data, geom="boxplot",
+   fill=quality, main="pH by Quality",
+   xlab="", ylab="pH")
+```
+
+10) sulphates: Sulfates are salts of sulfuric acid. They aren’t involved in wine production.  When it is used it is so that it will  correct mineral deficiencies in water during the creating process. It also adds a bit of a “sharp” taste.
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=sulphates), colour = 'red', size = 1)
+
+# Kernel density plots of sulphates
+# grouped by quality ranking
+qplot(sulphates, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on sulphate level", xlab="Sulphates",
+   ylab="Density")
+
+# Boxplots of sulphates by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, sulphates, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="Sulphates by Quality",
+   xlab="", ylab="Sulphates")
+
+qplot(quality, sulphates, data=red_wine_data, geom="boxplot",
+   fill=quality, main="Sulphates by Quality",
+   xlab="", ylab="Sulphates")
+```
+
+11) alcohol
+```{r}
+ggplot() + geom_point(data = red_wine_data, aes(x=quality, y=alcohol), colour = 'red', size = 1)
+
+# Kernel density plots of alcohol
+# grouped by quality ranking
+qplot(alcohol, data=red_wine_data, geom="density", fill=quality, alpha=I(.5),
+   main="Distribution of quality on alcohol level", xlab="Alcohol",
+   ylab="Density")
+
+# Boxplots of alcohol by quality ranking
+# observations (points) are overlayed and jittered
+qplot(quality, alcohol, data=red_wine_data, geom=c("boxplot", "jitter"),
+   fill=quality, main="Alcohol by Quality",
+   xlab="", ylab="Alcohol")
+
+qplot(quality, alcohol, data=red_wine_data, geom="boxplot",
+   fill=quality, main="Alcohol by Quality",
+   xlab="", ylab="Alcohol")
+```
+
+

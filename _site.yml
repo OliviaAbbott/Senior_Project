@@ -1,0 +1,20 @@
+name: "Senior Project - Olivia Abbott"
+output_dir: "."
+navbar:
+  title: "Machine Learning Analysis"
+  left:
+    - text: "Data"
+      href: data.html
+  right:
+    - icon: fa-envelope fa-lg
+      href: 
+    - icon: fa-github fa-lg
+      href:
+    - icon: fa-twitter fa-lg
+      href: 
+    - icon: fa-linkedin fa-lg
+      href: 
+output:
+  html_document:
+    theme: paper
+    css: 'styles.css'
